@@ -53,6 +53,27 @@
                         <p class="card-description">ゼロから何かを生み出す喜び、創意工夫に惹かれます。</p>
                     </div>
                 </div>
+                
+                <div class="grid profile-grid secondary-grid">
+                    <div class="card reveal">
+                        <div class="card-icon">🧠</div>
+                        <h3>生活スタイル</h3>
+                        <p>論理的な思考 & 試行錯誤</p>
+                        <p class="card-description">物事を分解し、試しながら理解していくプロセスを大切にしています。</p>
+                    </div>
+                    <div class="card reveal">
+                        <div class="card-icon">✨</div>
+                        <h3>好きなこと・日常</h3>
+                        <p>コツコツと形にする時間</p>
+                        <p class="card-description">落ち着いた環境で、編み物のように着実に成果を積み上げる作業が好きです。</p>
+                    </div>
+                    <div class="card reveal">
+                        <div class="card-icon">🚀</div>
+                        <h3>挑戦したい技術</h3>
+                        <p>Web制作 & データ分析</p>
+                        <p class="card-description">アイデアを形にできる技術を身につけ、新しいアウトプットに繋げたいです。</p>
+                    </div>
+                </div>
             </div>
         </section>
 
@@ -93,9 +114,34 @@
                 </div>
             </div>
         </section>
+
+        <!-- Mini Game Section -->
+        <section id="game-section" class="section alt-bg">
+            <div class="container">
+                <h2 class="section-title reveal">Mini Game</h2>
+                <div class="game-container reveal">
+                    <p class="game-hint">スペースキーを連打して、毛糸を解こう！</p>
+                    <div class="game-visual">
+                        <div class="yarn-ball-game" id="yuan-ball">🧶</div>
+                        <div class="unraveling-yarn" id="yarn-line"></div>
+                    </div>
+                    <div class="game-stats">
+                        <div class="stat">Time: <span id="timer">10</span>s</div>
+                        <div class="stat">Score: <span id="score">0</span></div>
+                    </div>
+                    <button id="start-btn" class="game-btn">Start Game</button>
+                    <div id="game-result" class="game-result hidden">
+                        <h3>Game Over!</h3>
+                        <p>解けた毛糸の長さ: <span id="final-score">0</span> m</p>
+                        <button id="restart-btn" class="game-btn">Try Again</button>
+                    </div>
+                </div>
+            </div>
+        </section>
     </main>
 
     <footer class="footer">
+        <p class="greeting reveal">最後まで見てくれてありがとう！✨</p>
         <p>&copy; 2026 otiek. Crafted with 🧶 and AI.</p>
     </footer>
 
