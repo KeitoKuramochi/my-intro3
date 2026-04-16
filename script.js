@@ -90,24 +90,58 @@ document.addEventListener('DOMContentLoaded', () => {
     const startBtn = document.getElementById('start-btn');
     const restartBtn = document.getElementById('restart-btn');
     const gameResult = document.getElementById('game-result');
+    const countdownEl = document.getElementById('countdown');
 
     const startGame = () => {
         score = 0;
         timeLeft = 10;
-        gameActive = true;
+        gameActive = false; // Not active yet
         scoreEl.textContent = score;
         timerEl.textContent = timeLeft;
         yarnLine.style.width = '0%';
         gameResult.classList.add('hidden');
         startBtn.style.display = 'none';
         
-        timerId = setInterval(() => {
-            timeLeft--;
-            timerEl.textContent = timeLeft;
-            if (timeLeft <= 0) {
-                endGame();
+        // Start Countdown
+        runCountdown(() => {
+            gameActive = true;
+            timerId = setInterval(() => {
+                timeLeft--;
+                timerEl.textContent = timeLeft;
+                if (timeLeft <= 0) {
+                    endGame();
+                }
+            }, 1000);
+        });
+    };
+
+    const runCountdown = (callback) => {
+        let count = 3;
+        countdownEl.classList.remove('hidden');
+        countdownEl.textContent = count;
+        countdownEl.style.animation = 'none';
+        countdownEl.offsetHeight; // trigger reflow
+        countdownEl.style.animation = null;
+
+        const countInterval = setInterval(() => {
+            count--;
+            if (count > 0) {
+                countdownEl.textContent = count;
+                // Re-trigger animation
+                countdownEl.style.animation = 'none';
+                countdownEl.offsetHeight;
+                countdownEl.style.animation = null;
+            } else if (count === 0) {
+                countdownEl.textContent = 'START!';
+                countdownEl.style.animation = 'none';
+                countdownEl.offsetHeight;
+                countdownEl.style.animation = null;
+            } else {
+                clearInterval(countInterval);
+                countdownEl.classList.add('hidden');
+                callback();
             }
-        }, 1000);
+        }, 800);
     };
 
     const endGame = () => {

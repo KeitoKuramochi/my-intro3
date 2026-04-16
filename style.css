@@ -394,6 +394,25 @@ h1 {
     overflow: hidden;
 }
 
+.countdown {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 8rem;
+    font-weight: 800;
+    color: var(--primary-color);
+    z-index: 20;
+    text-shadow: 0 5px 15px rgba(224, 159, 125, 0.4);
+    animation: countdownPop 0.5s ease-out;
+}
+
+@keyframes countdownPop {
+    0% { transform: translate(-50%, -50%) scale(0.5); opacity: 0; }
+    50% { transform: translate(-50%, -50%) scale(1.2); opacity: 1; }
+    100% { transform: translate(-50%, -50%) scale(1); opacity: 1; }
+}
+
 .game-hint {
     margin-bottom: 2rem;
     font-weight: 500;
