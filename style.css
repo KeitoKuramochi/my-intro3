@@ -45,7 +45,7 @@ body {
 
 /* Navbar */
 .navbar {
-    padding: 2rem 5%;
+    padding: 1.5rem 5%;
     position: fixed;
     top: 0;
     width: 100%;
@@ -53,15 +53,95 @@ body {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    background: rgba(253, 251, 247, 0.8);
+    background: rgba(253, 251, 247, 0.85);
     backdrop-filter: blur(10px);
+    transition: var(--transition-fast);
 }
 
 .logo {
     font-size: 1.5rem;
     font-weight: 700;
     color: var(--primary-color);
-    letter-spacing: 2px;
+    letter-spacing: 1px;
+    cursor: pointer;
+    transition: var(--transition-fast);
+}
+
+.logo:hover {
+    transform: scale(1.05);
+}
+
+.nav-menu ul {
+    display: flex;
+    list-style: none;
+    gap: 1.5rem;
+}
+
+.nav-menu a {
+    text-decoration: none;
+    color: var(--text-color);
+    font-weight: 500;
+    font-size: 0.95rem;
+    transition: var(--transition-fast);
+    position: relative;
+}
+
+.nav-menu a:hover {
+    color: var(--primary-color);
+}
+
+.nav-menu a::after {
+    content: '';
+    position: absolute;
+    bottom: -5px;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background: var(--primary-color);
+    transition: var(--transition-fast);
+}
+
+.nav-menu a:hover::after {
+    width: 100%;
+}
+
+/* Floating Game Badge */
+.game-badge {
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    background: white;
+    padding: 12px 20px;
+    border-radius: 50px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+    z-index: 90;
+    cursor: pointer;
+    transition: var(--transition-fast);
+    border: 1px solid var(--accent-color);
+    animation: float 3s ease-in-out infinite;
+}
+
+.game-badge:hover {
+    transform: translateY(-5px) scale(1.05);
+    box-shadow: 0 15px 40px rgba(0,0,0,0.15);
+}
+
+@keyframes float {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-10px); }
+}
+
+.badge-icon {
+    font-size: 1.5rem;
+}
+
+.badge-text {
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: var(--primary-color);
 }
 
 /* Sections */
@@ -467,9 +547,21 @@ h1 {
 
 /* Responsive */
 @media (max-width: 768px) {
-    h1 { font-size: 2.5rem; }
+    .cursor-follow { display: none; }
+    .navbar { padding: 1rem 5%; }
+    .nav-menu { display: none; } /* Hide menu on small mobile for simplicity or can use a burger */
+    h1 { font-size: 2.2rem; }
+    .section { padding: 60px 5%; }
+    .section-title { font-size: 2rem; }
     .ai-content-wrapper { flex-direction: column; text-align: center; }
-    .profile-image { width: 200px; height: 200px; }
+    .profile-image { width: 180px; height: 180px; }
     .message-box { padding: 2rem; }
     .visual-content { display: none; }
+    
+    .game-container { padding: 1.5rem; }
+    .yarn-ball-game { font-size: 5rem; }
+    .game-visual { height: 150px; }
+    .game-stats { gap: 1.5rem; font-size: 1rem; }
+    .game-badge { bottom: 20px; right: 20px; padding: 10px 15px; }
+    .badge-text { display: none; } /* Icon only on small screens */
 }

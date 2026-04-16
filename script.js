@@ -30,12 +30,40 @@ document.addEventListener('DOMContentLoaded', () => {
     const navbar = document.querySelector('.navbar');
     window.addEventListener('scroll', () => {
         if (window.scrollY > 50) {
-            navbar.style.padding = '1rem 5%';
+            navbar.style.padding = '0.8rem 5%';
             navbar.style.boxShadow = '0 5px 20px rgba(0,0,0,0.05)';
         } else {
-            navbar.style.padding = '2rem 5%';
+            navbar.style.padding = '1.5rem 5%';
             navbar.style.boxShadow = 'none';
         }
+    });
+
+    // Logo and Nav Click (Smooth Scroll)
+    const logoTop = document.getElementById('logo-top');
+    logoTop.addEventListener('click', () => {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+
+    const navLinks = document.querySelectorAll('.nav-menu a');
+    navLinks.forEach(link => {
+        link.addEventListener('click', (e) => {
+            e.preventDefault();
+            const targetId = link.getAttribute('href');
+            const targetEl = document.querySelector(targetId);
+            if (targetEl) {
+                const navHeight = navbar.offsetHeight;
+                const targetPosition = targetEl.offsetTop - navHeight;
+                window.scrollTo({ top: targetPosition, behavior: 'smooth' });
+            }
+        });
+    });
+
+    // Floating Badge Click
+    const gameBadge = document.getElementById('game-badge');
+    gameBadge.addEventListener('click', () => {
+        const gameSection = document.getElementById('game-section');
+        const navHeight = navbar.offsetHeight;
+        window.scrollTo({ top: gameSection.offsetTop - navHeight, behavior: 'smooth' });
     });
 
     // Simple fade-in sequence for hero
@@ -110,6 +138,22 @@ document.addEventListener('DOMContentLoaded', () => {
         if (e.code === 'Space') {
             e.preventDefault(); // Prevent scrolling
             handleInput();
+        }
+    });
+
+    // Mobile/Click Support for Game
+    const gameContainer = document.querySelector('.game-container');
+    gameContainer.addEventListener('pointerdown', (e) => {
+        if (gameActive && e.target.closest('.game-visual')) {
+            handleInput();
+            
+            // Add a little punch effect on tap
+            const ball = document.getElementById('yuan-ball');
+            ball.style.transition = 'transform 0.05s ease';
+            ball.style.transform += ' scale(1.2)';
+            setTimeout(() => {
+                ball.style.transition = 'transform 0.1s ease';
+            }, 50);
         }
     });
 
