@@ -105,6 +105,7 @@ document.addEventListener('DOMContentLoaded', () => {
         // Start Countdown
         runCountdown(() => {
             gameActive = true;
+            document.body.classList.add('no-scroll'); // Disable scroll
             timerId = setInterval(() => {
                 timeLeft--;
                 timerEl.textContent = timeLeft;
@@ -146,6 +147,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const endGame = () => {
         gameActive = false;
+        document.body.classList.remove('no-scroll'); // Re-enable scroll
         clearInterval(timerId);
         finalScoreEl.textContent = score;
         gameResult.classList.remove('hidden');
@@ -175,16 +177,20 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 
-    // Mobile/Click Support for Game
-    const gameContainer = document.querySelector('.game-container');
-    gameContainer.addEventListener('pointerdown', (e) => {
-        if (gameActive && e.target.closest('.game-visual')) {
+    // Full screen tap support during game
+    window.addEventListener('pointerdown', (e) => {
+        if (gameActive) {
+            // Prevent zooming/default behavior on double tap if possible
+            if (e.pointerType === 'touch') {
+                // We don't preventDefault here as it might block the browser's 
+                // own handling, but we make sure the game logic works.
+            }
             handleInput();
             
-            // Add a little punch effect on tap
+            // Visual punch effect
             const ball = document.getElementById('yuan-ball');
             ball.style.transition = 'transform 0.05s ease';
-            ball.style.transform += ' scale(1.2)';
+            ball.style.transform += ' scale(1.1)';
             setTimeout(() => {
                 ball.style.transition = 'transform 0.1s ease';
             }, 50);

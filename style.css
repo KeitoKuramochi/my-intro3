@@ -29,6 +29,11 @@ body {
     background-position: 0 0, 20px 20px;
 }
 
+body.no-scroll {
+    overflow: hidden;
+    touch-action: none;
+}
+
 /* Custom Cursor */
 .cursor-follow {
     width: 20px;
